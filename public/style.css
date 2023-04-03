@@ -21,3 +21,8 @@ body {
 .hide {
   display: none;
 }
+
+.camera-add-form {
+  width: 50%;
+  height: 50%;
+}

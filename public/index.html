@@ -28,7 +28,7 @@
       <h2>1'st Zoom</h2>
       <h3>List of all cameras</h3>
       <div>
-        <button class="btn btn-sm btn-warning btn-camera-add">
+        <button id="add-camera" class="btn btn-sm btn-warning btn-camera-add">
           Add Camera
         </button>
         <button class="btn btn-sm btn-warning btn-network-add">
@@ -36,10 +36,34 @@
         </button>
       </div>
     </div>
-    <div class="camera-tables hide">
+    <div class="container camera-add-form hide">
+      <form>
+        <label class="form-label" for="camera-name">Name:</label>
+        <input class="form-control" type="text" id="camera-name" />
+        <label class="form-label" for="description">Description:</label>
+        <input class="form-control" type="text" id="description" />
+        <label class="form-label" for="url">Url:</label>
+        <input class="form-control" type="text" id="url" />
+        <button
+          id="btn-add-camera"
+          style="margin-top: 10px"
+          class="btn btn-sm btn-success"
+        >
+          Submit
+        </button>
+        <button
+          id="btn-close-camera"
+          style="margin-top: 10px"
+          class="btn btn-sm btn-danger"
+        >
+          Close
+        </button>
+      </form>
+    </div>
+    <div class="camera-tables">
       <div>
         <h6>Camera</h6>
-        <table style="margin-top: 30px" class="table table-dark table-hover">
+        <table style="margin-top: 30px" class="table">
           <thead>
             <tr>
               <th>SlNo</th>
