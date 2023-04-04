@@ -9,6 +9,7 @@ const addCameraForm = document.querySelector(".camera-add-form ");
 const btnSndCamera = document.getElementById("btn-add-camera");
 
 btnAddCamera.addEventListener("click", () => {
+  clearCameraFields();
   tableContainer.classList.add("hide");
   addCameraForm.classList.remove("hide");
 });
@@ -67,13 +68,31 @@ const deleteCamera = async (e) => {
   }
 };
 
+// Edit Camera Details
+let cameraName, description, url, id;
+
+const editCamera = (e) => {
+  id = e.dataset.id;
+
+  cameraName = document.getElementById(`${id}name`).textContent;
+  description = document.getElementById(`${id}desc`).textContent;
+  url = document.getElementById(`${id}url`).textContent;
+  console.log(cameraName);
+
+  document.getElementById("camera-name").value = cameraName;
+  document.getElementById("description").value = description;
+  document.getElementById("url").value = url;
+  tableContainer.classList.add("hide");
+  addCameraForm.classList.remove("hide");
+};
+
 // Rendering camera details
 const renderCameras = (name, description, url, id, i) => {
   const template = ` <tr>
       <td>${i}</td>
-      <td>${name}</td>
-      <td>${description}</td>
-      <td>${url}</td>
+      <td id="${id}name">${name}</td>
+      <td id="${id}desc">${description}</td>
+      <td id="${id}url">${url}</td>
       <td><button data-id=${id} class="btn btn-outline-info" onclick='editCamera(this)'>Edit</button>
       </td>
       <td><button data-id=${id} class="btn btn-outline-danger" onclick='deleteCamera(this)'>Delete</button>
