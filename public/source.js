@@ -208,3 +208,50 @@ addNetwork.addEventListener("click", async (e) => {
     console.log(err);
   }
 });
+
+// Rendering networks
+
+const renderNetworks = (name, description, url, i, id, cameras) => {
+  const template = `<tr>
+              <td>${i}</td>
+              <td>${name}</td>
+              <td>${description}</td>
+              <td>${url}</td>
+              <td>${cameras}</td>
+              <td><button data-id=${id} class="btn btn-outline-info" onclick='editNetwork(this)'>Edit</button>
+      </td>
+      <td><button data-id=${id} class="btn btn-outline-danger" onclick='deleteNetwork(this)'>Delete</button>
+      </td>
+            </tr>`;
+  const networkTable = document.getElementById("network-table");
+  networkTable.innerHTML += template;
+};
+
+// Retreiving all the networks
+
+const allNetworks = async () => {
+  try {
+    const networks = await axios({
+      method: "GET",
+      url: `${URL}/api/v1/network/getnetworks`,
+    });
+    let cameraInfo = "";
+    console.log(networks.data.networks);
+    networks.data.networks.forEach((network, i) => {
+      cameraInfo += JSON.stringify(network.cameras);
+      renderNetworks(
+        network.name,
+        network.description,
+        network.url,
+        i + 1,
+        network.id,
+        cameraInfo
+      );
+    });
+    console.log(cameraInfo);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+allNetworks();
