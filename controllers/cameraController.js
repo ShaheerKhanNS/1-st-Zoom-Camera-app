@@ -9,7 +9,7 @@ exports.addCamera = async (req, res) => {
       description,
       url,
     });
-    res.status(200).json({
+    res.status(201).json({
       status: "success",
       message: "Successfully added camera",
     });
@@ -19,5 +19,20 @@ exports.addCamera = async (req, res) => {
       err,
     });
     throw new Error(err);
+  }
+};
+
+exports.getAllCameras = async (req, res) => {
+  try {
+    const cameras = await Camera.findAll();
+
+    res.status(200).json({
+      status: "success",
+      data: { cameras },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+    });
   }
 };

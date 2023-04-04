@@ -42,7 +42,7 @@ btnSndCamera.addEventListener("click", async (e) => {
         url,
       },
     });
-    if (response.status === 200) {
+    if (response.status === 201) {
       clearCameraFields();
       alert(response.data.message);
     }
