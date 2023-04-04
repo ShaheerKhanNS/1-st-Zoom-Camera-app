@@ -79,7 +79,8 @@ exports.addCameraToNetwork = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: "fail",
-      message: "SomethingWent wrong",
+      message: "Something Went wrong",
+      err,
     });
   }
 };

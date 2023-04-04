@@ -261,14 +261,30 @@ allNetworks();
 // Adding camera to the network
 
 const cameraBox = document.getElementById("box-networkadd");
+const btnCameraToNetwork = document.getElementById("btn-add-camera-to-network");
 
 let network_id;
 const addCamera = (e) => {
   network_id = e.dataset.id;
-  console.log(id);
+  console.log(network_id);
   tableContainer.classList.add("hide");
   cameraBox.classList.remove("hide");
 };
+
+// Add CameraToNetwork
+
+btnCameraToNetwork.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("camera-to-add").value;
+  const response = await axios({
+    method: "PATCH",
+    url: `${URL}/api/v1/network/addcamera/${network_id}`,
+    data: {
+      name,
+    },
+  });
+  console.log(response);
+});
 
 // Render available cams
 
