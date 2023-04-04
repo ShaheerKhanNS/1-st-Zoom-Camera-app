@@ -38,3 +38,23 @@ exports.getAllCameras = async (req, res) => {
     });
   }
 };
+
+exports.deleteCamera = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const camera = Camera.destroy({
+      where: {
+        id,
+      },
+    });
+
+    res.status(204).json({
+      status: "success",
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      err,
+    });
+  }
+};

@@ -51,6 +51,22 @@ btnSndCamera.addEventListener("click", async (e) => {
   }
 });
 
+// Deleting a camera
+
+const deleteCamera = async (e) => {
+  try {
+    const id = e.dataset.id;
+    const response = await axios({
+      method: "DELETE",
+      url: `${URL}/api/v1/camera/deletecamera/${id}`,
+    });
+
+    if (response.status === 204) window.location.reload();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // Rendering camera details
 const renderCameras = (name, description, url, id, i) => {
   const template = ` <tr>
