@@ -7,6 +7,7 @@ const tableContainer = document.querySelector(".camera-tables");
 const addCameraForm = document.querySelector(".camera-add-form ");
 
 const btnSndCamera = document.getElementById("btn-add-camera");
+const btnEditCamera = document.getElementById("btn-edit-camera");
 
 btnAddCamera.addEventListener("click", () => {
   clearCameraFields();
@@ -85,6 +86,31 @@ const editCamera = (e) => {
   tableContainer.classList.add("hide");
   addCameraForm.classList.remove("hide");
 };
+
+// Editing implementaion
+
+btnEditCamera.addEventListener("click", async (e) => {
+  try {
+    alert("Are you sure you want to update!");
+    e.preventDefault();
+    const name = document.getElementById("camera-name").value;
+    const description = document.getElementById("description").value;
+    const url = document.getElementById("url").value;
+    const response = await axios({
+      method: "PATCH",
+      url: `${URL}/api/v1/camera/editcamera/${id}`,
+      data: {
+        name,
+        description,
+        url,
+      },
+    });
+
+    if (response.status === 200) clearCameraFields();
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 // Rendering camera details
 const renderCameras = (name, description, url, id, i) => {

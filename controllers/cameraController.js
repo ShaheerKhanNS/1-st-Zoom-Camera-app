@@ -42,7 +42,7 @@ exports.getAllCameras = async (req, res) => {
 exports.deleteCamera = async (req, res) => {
   try {
     const id = req.params.id;
-    const camera = Camera.destroy({
+    Camera.destroy({
       where: {
         id,
       },
@@ -53,6 +53,30 @@ exports.deleteCamera = async (req, res) => {
     });
   } catch (err) {
     res.status(404).json({
+      status: "fail",
+      err,
+    });
+  }
+};
+
+exports.editCamera = async (req, res) => {
+  console.log("enters");
+  try {
+    const { name, description, url } = req.body;
+    const id = req.params.id;
+    const camera = await Camera.findByPk(id);
+
+    camera.set({
+      name,
+      description,
+      url,
+    });
+    await camera.save();
+    res.status(200).json({
+      status: "success",
+    });
+  } catch (err) {
+    res.status(400).json({
       status: "fail",
       err,
     });

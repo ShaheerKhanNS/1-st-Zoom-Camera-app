@@ -6,5 +6,6 @@ const router = express.Router();
 router.route("/addcamera").post(cameraContoller.addCamera);
 router.route("/getcameras").get(cameraContoller.getAllCameras);
 router.route("/deletecamera/:id").delete(cameraContoller.deleteCamera);
+router.route("/editcamera/:id").patch(cameraContoller.editCamera);
 
 module.exports = router;
