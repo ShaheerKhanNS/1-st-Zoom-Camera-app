@@ -50,3 +50,46 @@ btnSndCamera.addEventListener("click", async (e) => {
     console.log(err);
   }
 });
+
+// Rendering camera details
+const renderCameras = (name, description, url, id, i) => {
+  const template = ` <tr>
+      <td>${i}</td>
+      <td>${name}</td>
+      <td>${description}</td>
+      <td>${url}</td>
+      <td><button data-id=${id} class="btn btn-outline-info" onclick='editCamera(this)'>Edit</button>
+      </td>
+      <td><button data-id=${id} class="btn btn-outline-danger" onclick='deleteCamera(this)'>Delete</button>
+      </td>
+    </tr>`;
+
+  const cameraTable = document.getElementById("camera-table-body");
+  cameraTable.innerHTML += template;
+};
+
+// Retreiving all camera details
+
+const retrieveCameraDetails = async () => {
+  try {
+    const cameraDetails = await axios({
+      method: "GET",
+      url: `${URL}/api/v1/camera/getcameras`,
+    });
+
+    cameraDetails.data.cameras.forEach((camera, i) => {
+      renderCameras(
+        camera.name,
+        camera.description,
+        camera.url,
+        camera.id,
+        i + 1
+      );
+    });
+  } catch (err) {
+    alert(err.response.data.message);
+    console.log(err);
+  }
+};
+
+retrieveCameraDetails();

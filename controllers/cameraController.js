@@ -24,11 +24,13 @@ exports.addCamera = async (req, res) => {
 
 exports.getAllCameras = async (req, res) => {
   try {
-    const cameras = await Camera.findAll();
+    const cameras = await Camera.findAll({
+      attributes: ["id", "name", "description", "url"],
+    });
 
     res.status(200).json({
       status: "success",
-      data: { cameras },
+      cameras,
     });
   } catch (err) {
     res.status(400).json({
