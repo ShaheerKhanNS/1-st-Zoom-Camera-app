@@ -313,3 +313,6 @@ const retreiveAvailableCam = async () => {
 };
 
 retreiveAvailableCam();
+
+// DeleteNetwork
+

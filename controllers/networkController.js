@@ -84,3 +84,37 @@ exports.addCameraToNetwork = async (req, res) => {
     });
   }
 };
+
+exports.deleteNetwork = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    Network.destroy({
+      where: {
+        id,
+      },
+    });
+
+    const cameras = await Camera.findAll({
+      where: {
+        networkId: id,
+      },
+    });
+
+    cameras.forEach(async (camera) => {
+      await camera.update({
+        isAvailable: true,
+        networkId: null,
+      });
+    });
+
+    res.status(204).json({
+      status: "success",
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "SomeThing Went Wrong",
+    });
+  }
+};
