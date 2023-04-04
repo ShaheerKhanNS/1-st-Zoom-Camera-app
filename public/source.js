@@ -316,3 +316,17 @@ retreiveAvailableCam();
 
 // DeleteNetwork
 
+const deleteNetwork = async (e) => {
+  network_id = e.dataset.id;
+
+  try {
+    const response = await axios({
+      method: "DELETE",
+      url: `${URL}/api/v1/network/deletenetwork/${network_id}`,
+    });
+
+    if (response.status === 204) window.location.reload();
+  } catch (err) {
+    console.log(err);
+  }
+};
