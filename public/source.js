@@ -222,6 +222,8 @@ const renderNetworks = (name, description, url, i, id, cameras) => {
       </td>
       <td><button data-id=${id} class="btn btn-outline-danger" onclick='deleteNetwork(this)'>Delete</button>
       </td>
+      <td><button data-id=${id} class="btn btn-outline-success" onclick='addCamera(this)'>AddCamera</button>
+      </td>
             </tr>`;
   const networkTable = document.getElementById("network-table");
   networkTable.innerHTML += template;
@@ -247,11 +249,20 @@ const allNetworks = async () => {
         network.id,
         cameraInfo
       );
+      cameraInfo = "";
     });
-    console.log(cameraInfo);
   } catch (err) {
     console.log(err);
   }
 };
 
 allNetworks();
+
+// Adding camera to the network
+
+let network_id;
+const addCamera = (e) => {
+  network_id = e.dataset.id;
+  console.log(id);
+  tableContainer.classList.add("hide");
+};

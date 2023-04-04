@@ -26,3 +26,13 @@ body {
   width: 50%;
   height: 50%;
 }
+
+.form-add-camera-to-network {
+  width: 50%;
+}
+
+.camera-to-network {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}

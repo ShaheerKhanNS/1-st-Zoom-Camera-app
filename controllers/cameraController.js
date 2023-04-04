@@ -82,3 +82,23 @@ exports.editCamera = async (req, res) => {
     });
   }
 };
+
+exports.getAvailableCameras = async (req, res) => {
+  try {
+    const availableCameras = await Camera.findAll({
+      where: {
+        isAvailable: true,
+      },
+    });
+
+    res.status(200).json({
+      status: "success",
+      availableCameras,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "Something went wrong",
+    });
+  }
+};
