@@ -31,7 +31,10 @@
         <button id="add-camera" class="btn btn-sm btn-warning btn-camera-add">
           Add Camera
         </button>
-        <button class="btn btn-sm btn-warning btn-network-add">
+        <button
+          id="cameraNetwork"
+          class="btn btn-sm btn-warning btn-network-add"
+        >
           Add CameraNetwork
         </button>
       </div>
@@ -65,6 +68,37 @@
         >
           Edit
         </button>
+      </form>
+    </div>
+    <div class="container network-add-form hide">
+      <form>
+        <label class="form-label" for="network-name">Name:</label>
+        <input class="form-control" type="text" id="network-name" />
+        <label class="form-label" for="network-description">Description:</label>
+        <input class="form-control" type="text" id="network-description" />
+        <label class="form-label" for="network-url">Url:</label>
+        <input class="form-control" type="text" id="network-url" />
+        <button
+          id="btn-add-network"
+          style="margin-top: 10px"
+          class="btn btn-sm btn-success"
+        >
+          Submit
+        </button>
+        <button
+          id="btn-close-network-dom"
+          style="margin-top: 10px"
+          class="btn btn-sm btn-danger"
+        >
+          Close
+        </button>
+        <!-- <button
+          id="btn-edit-camera"
+          style="margin-top: 10px"
+          class="btn btn-sm btn-primary"
+        >
+          Edit
+        </button> -->
       </form>
     </div>
     <div class="camera-tables">

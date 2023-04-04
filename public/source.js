@@ -154,3 +154,21 @@ const retrieveCameraDetails = async () => {
 };
 
 retrieveCameraDetails();
+
+// camera Networks
+
+const btnNetwork = document.getElementById("cameraNetwork");
+const btnCloseNetwork = document.getElementById("btn-close-network-dom");
+const networkTable = document.querySelector(".network-add-form");
+
+// DOM manipulation
+btnNetwork.addEventListener("click", (e) => {
+  networkTable.classList.remove("hide");
+  tableContainer.classList.add("hide");
+});
+
+btnCloseNetwork.addEventListener("click", (e) => {
+  e.preventDefault();
+  networkTable.classList.add("hide");
+  tableContainer.classList.remove("hide");
+});
