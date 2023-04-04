@@ -60,7 +60,6 @@ exports.deleteCamera = async (req, res) => {
 };
 
 exports.editCamera = async (req, res) => {
-  console.log("enters");
   try {
     const { name, description, url } = req.body;
     const id = req.params.id;

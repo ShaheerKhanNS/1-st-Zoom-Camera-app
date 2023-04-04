@@ -218,8 +218,7 @@ const renderNetworks = (name, description, url, i, id, cameras) => {
               <td>${description}</td>
               <td>${url}</td>
               <td>${cameras}</td>
-              <td><button data-id=${id} class="btn btn-outline-info" onclick='editNetwork(this)'>Edit</button>
-      </td>
+              
       <td><button data-id=${id} class="btn btn-outline-danger" onclick='deleteNetwork(this)'>Delete</button>
       </td>
       <td><button data-id=${id} class="btn btn-outline-success" onclick='addCamera(this)'>AddCamera</button>
@@ -270,6 +269,14 @@ const addCamera = (e) => {
   tableContainer.classList.add("hide");
   cameraBox.classList.remove("hide");
 };
+
+document
+  .getElementById("btn-close-camera-to-network")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    cameraBox.classList.add("hide");
+    tableContainer.classList.remove("hide");
+  });
 
 // Add CameraToNetwork
 
