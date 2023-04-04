@@ -13,14 +13,17 @@ const Network = require("./models/networkModel");
 
 // Routes
 const cameraRoutes = require("./routes/cameraRoutes");
+const networkRoutes = require("./routes/networkRoutes");
 
 // Starting our App
 const app = express();
 
+// Middleware functions
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use("/api/v1/camera", cameraRoutes);
+app.use("/api/v1/network", networkRoutes);
 
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, `public/${req.url}`));

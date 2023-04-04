@@ -161,6 +161,8 @@ const btnNetwork = document.getElementById("cameraNetwork");
 const btnCloseNetwork = document.getElementById("btn-close-network-dom");
 const networkTable = document.querySelector(".network-add-form");
 
+const addNetwork = document.getElementById("btn-add-network");
+
 // DOM manipulation
 btnNetwork.addEventListener("click", (e) => {
   networkTable.classList.remove("hide");
@@ -171,4 +173,38 @@ btnCloseNetwork.addEventListener("click", (e) => {
   e.preventDefault();
   networkTable.classList.add("hide");
   tableContainer.classList.remove("hide");
+});
+
+// ClearFields
+
+const clearNetworkFields = () => {
+  document.getElementById("network-name").value =
+    document.getElementById("network-description").value =
+    document.getElementById("network-url").value =
+      "";
+};
+
+addNetwork.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("network-name").value;
+  const description = document.getElementById("network-description").value;
+  const url = document.getElementById("network-url").value;
+  try {
+    const response = await axios({
+      method: "POST",
+      url: `${URL}/api/v1/network/addnetwork`,
+      data: {
+        name,
+        description,
+        url,
+      },
+    });
+
+    if (response.status === 201) {
+      clearNetworkFields();
+      alert(response.data.message);
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });

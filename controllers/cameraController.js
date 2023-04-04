@@ -3,7 +3,7 @@ const Camera = require("../models/cameraModel");
 exports.addCamera = async (req, res) => {
   try {
     const { name, description, url } = req.body;
-    console.log(name, description, url);
+
     await Camera.create({
       name,
       description,
