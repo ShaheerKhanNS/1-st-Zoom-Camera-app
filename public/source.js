@@ -238,7 +238,7 @@ const allNetworks = async () => {
       url: `${URL}/api/v1/network/getnetworks`,
     });
     let cameraInfo = "";
-    console.log(networks.data.networks);
+
     networks.data.networks.forEach((network, i) => {
       cameraInfo += JSON.stringify(network.cameras);
       renderNetworks(
@@ -260,9 +260,40 @@ allNetworks();
 
 // Adding camera to the network
 
+const cameraBox = document.getElementById("box-networkadd");
+
 let network_id;
 const addCamera = (e) => {
   network_id = e.dataset.id;
   console.log(id);
   tableContainer.classList.add("hide");
+  cameraBox.classList.remove("hide");
 };
+
+// Render available cams
+
+const renderAvailableCam = (name, description) => {
+  const template = `<li>Model: ${name}==>Spec: ${description}</li>`;
+  const list = document.querySelector(".list-group");
+
+  list.innerHTML += template;
+};
+
+// Retrieve available cam
+
+const retreiveAvailableCam = async () => {
+  try {
+    const availableCam = await axios({
+      method: "GET",
+      url: `${URL}/api/v1/camera/availablecameras`,
+    });
+
+    availableCam.data.availableCameras.forEach((cam) => {
+      renderAvailableCam(cam.name, cam.description);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+retreiveAvailableCam();

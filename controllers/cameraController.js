@@ -89,6 +89,7 @@ exports.getAvailableCameras = async (req, res) => {
       where: {
         isAvailable: true,
       },
+      attributes: ["name", "description"],
     });
 
     res.status(200).json({

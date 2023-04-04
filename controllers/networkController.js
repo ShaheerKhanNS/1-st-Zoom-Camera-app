@@ -47,3 +47,39 @@ exports.getNetworks = async (req, res) => {
     });
   }
 };
+
+exports.addCameraToNetwork = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const id = req.params.id;
+
+    // Check whether the camera is available or not
+
+    const camera = await Camera.findOne({
+      where: {
+        name,
+      },
+    });
+
+    if (!camera && camera.isAvailable === false) {
+      res.status(404).json({
+        status: "fail",
+        message: "Camera is not available",
+      });
+    } else {
+      camera.set({
+        isAvailable: false,
+        networkId: id,
+      });
+      await camera.save();
+      res.status(201).json({
+        status: "success",
+      });
+    }
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "SomethingWent wrong",
+    });
+  }
+};
